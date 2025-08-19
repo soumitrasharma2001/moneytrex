@@ -1,0 +1,110 @@
+<div id="contact" class="contact-us section">
+    <div class="container">
+      <div class="row">
+      
+        <div class="col-lg-6 align-self-center wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.25s">
+          <div class="section-heading ">
+            <h2>Add Transaction</h2>
+          </div>
+        </div>
+        <div class="col-lg-12 wow fadeInRight" data-wow-duration="0.5s" data-wow-delay="0.25s">
+          <form id="contact" #myform="ngForm" (submit)="makeTrans(myform)">
+            <div class="row">
+              <div class="col-lg-6">
+                <fieldset>
+                  <input type="text" name="title" id="title" placeholder="Title" ngModel>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <input type="date" name="entrydate" ngModel>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <select type="text" name="type" ngModel>
+                    <option value="">Select the type</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                  </select>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <input type="number" name="amount" ngModel placeholder="Enter the Amount">
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <textarea name="description" type="text" class="form-control" id="description" placeholder="Enter the description" ngModel></textarea>  
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <button type="submit" id="form-submit" class="main-button ">Save Transaction</button>
+                </fieldset>
+                {{msg}}
+              </div>
+            </div>
+            <div class="contact-dec">
+              <img src="assets/assets/images/contact-decoration.png" alt="">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table table-bordered table-striped table-hover align-middle shadow-sm">
+            <thead>
+                <tr>
+                    <th>S no</th>
+                    <th>Title(Type)</th>
+                    <th>Transaction Date</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tr of translist,let i=index">
+                    <td>{{i+1}}</td>
+                    <td *ngIf="i === updateIndex">
+  <input type="text" [(ngModel)]="newTitle" class="form-control d-inline w-50">
+
+  <select [(ngModel)]="newType" name="type" class="form-select d-inline w-auto ms-2">
+    <option value="income">Income</option>
+    <option value="expense">Expense</option>
+  </select>
+</td>
+
+<td *ngIf="i === updateIndex">
+  <input type="date" [(ngModel)]="newDate" class="form-control">
+</td>
+
+<td *ngIf="i === updateIndex">
+  <input type="number" [(ngModel)]="newAmount" class="form-control">
+</td>
+
+<td *ngIf="i === updateIndex">
+  <textarea [(ngModel)]="newDesc" class="form-control"></textarea>
+</td>
+
+<td *ngIf="i === updateIndex">
+  <button (click)="setUpdateIndex(-1)" class="btn btn-dark">
+    <i class="bi bi-x-lg"></i>
+  </button>
+  &nbsp;
+  <button (click)="updateData(tr.transid)" class="btn btn-warning">
+    <i class="bi bi-save"></i>
+  </button>
+</td>     
+      <td *ngIf="i!==updateIndex">{{tr.title}}({{tr.type}})</td>
+      <td *ngIf="i!==updateIndex">{{tr.entrydate}}</td>
+      <td *ngIf="i!==updateIndex">{{tr.amount}}</td>
+      <td *ngIf="i!==updateIndex">{{tr.description}}</td>
+      <td *ngIf="i!==updateIndex"><button class="btn btn-warning" (click)="setUpdateIndex(i)"><i class="bi bi-pencil-square"></i></button>
+      &nbsp;
+      <button class="btn btn-danger" (click)="delTran(tr)"><i class="bi bi-trash"></i></button></td>
+  </tr>
+  </tbody>
+</table>

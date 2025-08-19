@@ -1,0 +1,47 @@
+<!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="index.html" class="logo">
+              <h4>Money<span>Trex</span></h4>
+            </a>
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav" *ngIf="userService.getUserInfo().islogin==false">
+              <li class="scroll-to-section"><a routerLink="/" class="active">Home</a></li>
+              <li class="scroll-to-section"><a routerLink="/about">About Us</a></li>
+              <li class="scroll-to-section"><a routerLink="/contact">Contact Us</a></li>
+              <li class="scroll-to-section"><a routerLink="/regist">Registration</a></li>
+              <li class="scroll-to-section">
+                <div class="main-blue-button">
+                  <a routerLink="/login">Login</a>
+                </div>
+              </li>
+
+            </ul> 
+            <ul class="nav" *ngIf="userService.getUserInfo().islogin">
+              <li class="scroll-to-section"><a routerLink="/customer" class="active">Home</a></li>
+              <li class="scroll-to-section"><a routerLink="/customer/trans">Transaction</a></li>
+              <li class="scroll-to-section"><a routerLink="/customer/exp">Expense</a></li>
+              <li class="scroll-to-section"><a routerLink="/customer/report">Report</a></li>
+              <li class="scroll-to-section">
+                <div class="main-blue-button">
+                  <a (click)="logout()">Logout</a>
+                </div>
+              </li>
+
+            </ul>        
+            <a class='menu-trigger'>
+                <span>Menu</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+

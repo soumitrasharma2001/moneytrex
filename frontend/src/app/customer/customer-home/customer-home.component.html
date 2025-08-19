@@ -1,0 +1,52 @@
+<div class="p-6 lg:p-10 space-y-6">
+
+  <!-- Header -->
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <h1 class="text-2xl lg:text-3xl font-semibold">Welcome back, {{username}} 👋</h1>
+      <p class="text-gray-500 mt-1">Here's what's happening with your MoneyTrex account</p>
+    </div>
+
+    <div class="progress rounded-3 shadow-sm" *ngIf="summary.expenseLimit!=0" style="height: 25px;">
+  <div class="progress-bar progress-bar-striped progress-bar-animated"
+       role="progressbar"
+       [ngClass]="{
+          'bg-success': (summary.expense / summary.expenseLimit) * 100 <= 50,
+          'bg-warning': (summary.expense / summary.expenseLimit) * 100 > 50 && (summary.expense / summary.expenseLimit) * 100 <= 80,
+          'bg-danger': (summary.expense / summary.expenseLimit) * 100 > 80
+       }"
+       [style.width.%]="(summary.expense / summary.expenseLimit) * 100">
+    {{ (summary.expense / summary.expenseLimit) * 100 | number:'1.0-0' }}%
+  </div>
+</div>
+
+
+
+
+  <!-- Summary cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div class="p-4 bg-white shadow rounded-lg">
+      <div class="text-xs uppercase text-gray-500">Account Balance</div>
+<div class="mt-1 text-2xl font-semibold"
+     [ngClass]="{'text-danger': summary.currentBalance < 0}">
+  ₹{{ summary.currentBalance | number:'1.2-2' }}
+</div>
+<div class="text-xs text-gray-500 mt-1">Available balance across all linked accounts</div>
+    </div>
+
+    <div class="p-4 bg-white shadow rounded-lg">
+      <div class="text-xs uppercase text-gray-500">Income (30d)</div>
+      <div class="mt-1 text-xl font-semibold">₹{{ summary.income==null?0:summary.income | number:'1.2-2' }}</div>
+      <div class="text-xs text-gray-500 mt-1">Total income in the last 30 days</div>
+    </div>
+
+    <div class="p-4 bg-white shadow rounded-lg">
+      <div class="text-xs uppercase text-gray-500">Expenses (30d)</div>
+      <div class="mt-1 text-xl font-semibold">₹{{ summary.expense==null?0:summary.expense | number:'1.2-2' }}</div>
+      <div class="text-xs text-gray-500 mt-1">Total expenses in the last 30 days</div>
+    </div>
+  </div>
+  
+    
+
+</div>
