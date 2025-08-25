@@ -16,7 +16,11 @@ export class CustomerTransactionComponent implements OnInit{
   public newDesc:string=""
   public msg:string=""
   public translist:any[]=[]
-  constructor(private http:HttpClient,private userService:UserService){}
+  public currDate:string=""
+  constructor(private http:HttpClient,private userService:UserService){
+    const today=new Date()
+    this.currDate=today.toISOString().substring(0,10)
+  }
   ngOnInit(): void {
       const token=this.userService.getUserInfo().token
       const headers=new HttpHeaders({'Authorization':"Bearer "+token})

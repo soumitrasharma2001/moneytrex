@@ -17,14 +17,13 @@
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="date" name="entrydate" ngModel>
+                  <input type="date" name="entrydate" [ngModel]="currDate">
                 </fieldset>
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                  <select type="text" name="type" ngModel>
-                    <option value="">Select the type</option>
-                    <option value="income">Income</option>
+                  <select type="text" name="type" [ngModel]="'income'">
+                    <option value="income" selected>Income</option>
                     <option value="expense">Expense</option>
                   </select>
                 </fieldset>

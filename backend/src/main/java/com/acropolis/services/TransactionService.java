@@ -67,7 +67,7 @@ public class TransactionService {
 	@Transactional
 	public Transaction update(TransactionModel model,Integer transid) {
 		Users userob = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Transaction tr=new Transaction(trep.findById(transid).get());
+		Transaction tr=trep.findById(transid).get();
 		//Revert the old transaction
 		if("income".equals(tr.getType()))
 			userob.setBalance(userob.getBalance()-tr.getAmount());
@@ -79,8 +79,12 @@ public class TransactionService {
 			userob.setBalance(userob.getBalance()+model.getAmount());
 		else
 			userob.setBalance(userob.getBalance()-model.getAmount());
+		tr.setAmount(model.getAmount());
+		tr.setDescription(model.getDescription());
+		tr.setType(model.getType());
+		tr.setUpdated(LocalDate.now());
 		urep.save(userob);
-		return trep.save(tr.update(model));
+		return trep.save(tr);
 	}
 
 	public void delete(Transaction tr) {
